@@ -197,7 +197,7 @@ function App() {
               />
             </div>
             
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+            <div className="action-buttons">
               <button className="btn btn-secondary" onClick={() => { setUploadedImages([]); setCroppedImages([]); }}>
                 Cancel
               </button>
@@ -254,7 +254,7 @@ function App() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
+          <div className="action-buttons" style={{ marginTop: '1.5rem' }}>
             <button className="btn btn-secondary" onClick={() => { setUploadedImages([]); setCroppedImages([]); }}>
               Start Over
             </button>
