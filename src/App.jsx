@@ -78,7 +78,7 @@ function App() {
 
     const outerDiameter = 40; 
     const innerDiameter = 30; 
-    const margin = 10;
+    const margin = 5;
     const spacing = 5;
     const step = outerDiameter + spacing;
     const radius = outerDiameter / 2;
@@ -111,28 +111,24 @@ function App() {
       
       let cx, cy;
       
+      const gridCols = Math.min(itemsOnPage, maxCols);
+      const gridRows = Math.ceil(itemsOnPage / maxCols);
+      
+      const gridW = gridCols * outerDiameter + (gridCols - 1) * spacing;
+      const gridH = gridRows * outerDiameter + (gridRows - 1) * spacing;
+      
+      let startX, startY;
+      
       if (position === 'center') {
-        const gridCols = Math.min(itemsOnPage, maxCols);
-        const gridRows = Math.ceil(itemsOnPage / maxCols);
-        
-        const gridW = gridCols * outerDiameter + (gridCols - 1) * spacing;
-        const gridH = gridRows * outerDiameter + (gridRows - 1) * spacing;
-        
-        const startX = (actualWidth - gridW) / 2 + radius;
-        const startY = (actualHeight - gridH) / 2 + radius;
-        
-        cx = startX + c * step;
-        cy = startY + r * step;
+        startX = (actualWidth - gridW) / 2 + radius;
+        startY = (actualHeight - gridH) / 2 + radius;
       } else {
-        let dirX = position.includes('right') ? -1 : 1;
-        let dirY = position.includes('bottom') ? -1 : 1;
-        
-        let startX = position.includes('right') ? actualWidth - margin - radius : margin + radius;
-        let startY = position.includes('bottom') ? actualHeight - margin - radius : margin + radius;
-        
-        cx = startX + c * step * dirX;
-        cy = startY + r * step * dirY;
+        startX = position.includes('right') ? actualWidth - margin - gridW + radius : margin + radius;
+        startY = position.includes('bottom') ? actualHeight - margin - gridH + radius : margin + radius;
       }
+      
+      cx = startX + c * step;
+      cy = startY + r * step;
       
       drawInstance(cx, cy, img);
     });
